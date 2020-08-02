@@ -8,8 +8,42 @@ ABCIでジョブを投げるのに使えるスクリプトです。
 みたいな感じでジョブが投げれます。  
 任意のディレクトリでqsub_command.shにシンボリックリンクをはって使うこともできます。
 
-rt_G.small=1のところを計算に応じて大きさ変えてもらえればと思います
+## my_qrsh, my_qsub_commandコマンドを作って使う
+`my_qsub_command python hogehoge --option `のように簡易的に使う構成です
+
+### ダウンロード・書き替え
+```
+mkdir ~/tmp
+git clone https://github.com/clinfo/ABCI_jobscript.git
+```
+`ABCI_jobscript/qrsh.sh` と `ABCI_jobscript/my_qsub_command.sh`
+をエディタで開いて、グループ名の部分（gca50095）を書き換える
+
+### `~/bin`以下に配置してパスを通す
+
+```
+mkdir ~/bin
+mv ABCI_jobscript/qrsh.sh ~/bin/qrsh
+mv ABCI_jobscript/my_qsub_command.sh ~/bin/my_qsub_command.sh
+
+echo "export PATH=/home/$(whoami)/bin:\$PATH" >> .bashrc
+```
+
+以下のような配置になる
+
+```
+bin/
+├── my_qrsh
+└── my_qsub_command
+tmp/
+```
+
 ## ジョブ実行リソース
+ABCI_jobscript/qrsh.sh
+ABCI_jobscript/my_qsub_command.sh
+の中をエディタで開いて、
+rt_G.small=1のところを計算に応じて大きさ変えてもらえればと思います
+
 |資源タイプ|資源タイプ名|説明|計算資源概要|ポイント|
 |:--:|:--:|:--:|:--:|:--:|
 |Full|rt_F|ノード占有|4GPU,40コア,360GBメモリ|1.0 ポイント/時間|
