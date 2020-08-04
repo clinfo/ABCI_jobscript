@@ -37,10 +37,19 @@ bin/
 └── my_qsub_command
 tmp/
 ```
+my_qsub_commandの以下の部分を書き替えて、
+/home/aca10350zi/test/qsub_temlate.sh
+qsub_temlate.shの場所をフルパスで指定するようにしてください
+
+#### qsub_temlate.shの書き替え
+
+- qsub_temlate.shのmodule ロード部分を適切に置き換えて下さい
+- #!/bin/sh の部分を環境等に応じて#!/bin/bash に変更
+- #$-l rt_G.small=1の部分を計算リソースによって変更
 
 ## ジョブ実行リソース
 ABCI_jobscript/qrsh.sh
-ABCI_jobscript/my_qsub_command.sh
+ABCI_jobscript/qsub_temlate.sh
 の中をエディタで開いて、
 rt_G.small=1のところを計算に応じて大きさ変えてもらえればと思います
 
